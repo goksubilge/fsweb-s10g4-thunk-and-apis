@@ -7,9 +7,14 @@ import { BrowserRouter } from "react-router-dom";
 import { legacy_createStore as createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import { myReducer } from "./reducers";
+
 import thunk from "redux-thunk";
+
 import logger from "redux-logger";
 import { composeWithDevTools } from "redux-devtools-extension";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const store = createStore(
   myReducer,
@@ -19,6 +24,7 @@ const store = createStore(
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
+    <ToastContainer />
     <BrowserRouter>
       <>
         <App />

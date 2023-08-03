@@ -20,9 +20,12 @@ export const removeFav = (id) => {
 
 export const fetchAnother = () => (dispatch) => {
   dispatch({ type: FETCH_LOADING });
-  axios.get("https://www.boredapi.com/api/activity").then((res) => {
-    dispatch({ type: FETCH_SUCCESS, payload: res.data }).catch((error) => {
-      dispatch({ type: FETCH_ERROR, payload: error.message });
+  axios
+    .get("https://catfact.ninja/fact")
+    .then((res) => {
+      dispatch({ type: FETCH_SUCCESS, payload: res.data.fact });
+    })
+    .catch((error) => {
+      dispatch({ type: FETCH_ERROR, payload: error });
     });
-  });
 };

@@ -7,6 +7,12 @@ import {
   GET_FAVS_FROM_LS,
 } from "./actions";
 
+/*
+import { toast } from "react-toastify";
+const apiStatus = toast.loading("e Loading...")
+toast.update(apiStatus,{render:"loading road", type:"sucess", isLoading: false})
+*/
+
 const initial = {
   favs: [],
   current: null,
