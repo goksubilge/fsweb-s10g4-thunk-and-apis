@@ -22,7 +22,12 @@ export default function App() {
     dispatch(fetchAnother());
   };
 
-  function addToFavs() {}
+  function addToFavs() {
+    if (current) {
+      dispatch(addFav(current));
+      call(); // aynısını bi daha ekletmemek için fetch lediğim fonks bir daha çağırdım.
+    }
+  }
 
   return (
     <div className="wrapper max-w-xl mx-auto px-4">
@@ -80,7 +85,7 @@ export default function App() {
           <div className="flex flex-col gap-3">
             {favs.length > 0 ? (
               favs.map((item) => (
-                <FavItem key={item.key} id={item.key} title={item.activity} />
+                <FavItem key={item.id} id={item.id} title={item.activity} />
               ))
             ) : (
               <div className="bg-white p-6 text-center shadow-md">

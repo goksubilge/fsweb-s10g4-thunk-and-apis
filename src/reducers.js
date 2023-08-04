@@ -28,14 +28,37 @@ function readFavsFromLocalStorage() {
 export function myReducer(state = initial, action) {
   switch (action.type) {
     case FAV_ADD:
-      return state;
+      apiStatus = toast.info("✅fav'ladın honey 🐷", {
+        isLoading: false,
+        position: "top-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return { ...state, favs: [...state.favs, action.payload] };
 
     case FAV_REMOVE:
-      return state;
+      apiStatus = toast.warn("it's just gone, bybye 🔅", {
+        position: "top-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return {
+        ...state,
+        favs: state.favs.filter((item) => item.id !== action.payload),
+      };
 
     case FETCH_SUCCESS:
       // böyle bir toastify oluşturma şekli de var, ilk dört satırı belirledik flan, bunu yaptım çünkü açılışta direkt olarak api yi gösteriyor bana böyle olduğunda.
-
       toast.update(apiStatus, {
         render: "✅okey, process done honey 🐷",
         isLoading: false,
