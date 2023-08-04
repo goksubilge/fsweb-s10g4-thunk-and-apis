@@ -34,10 +34,10 @@ export function myReducer(state = initial, action) {
       return state;
 
     case FETCH_SUCCESS:
-      // böyle bir toastify oluşturma şekli de var, ilk dört satırı belirledik flan, örnek olarak bırakıyorum.
+      // böyle bir toastify oluşturma şekli de var, ilk dört satırı belirledik flan, bunu yaptım çünkü açılışta direkt olarak api yi gösteriyor bana böyle olduğunda.
+
       toast.update(apiStatus, {
         render: "✅okey, process done honey 🐷",
-        type: "sucess",
         isLoading: false,
         position: "top-left",
         autoClose: 2000,
@@ -48,7 +48,7 @@ export function myReducer(state = initial, action) {
         progress: undefined,
         theme: "light",
       });
-      return { ...state, loading: true, error: null };
+      return { ...state, current: action.payload, loading: false };
 
     case FETCH_LOADING:
       apiStatus = toast.loading("E Loading be Sugar...🔅", {
@@ -61,7 +61,7 @@ export function myReducer(state = initial, action) {
         progress: undefined,
         theme: "light",
       });
-      return { ...state, current: action.payload, loading: false };
+      return { ...state, loading: true, error: null, current: null };
 
     case FETCH_ERROR:
       apiStatus = toast.error("🦄 Wow there's a mistake", {

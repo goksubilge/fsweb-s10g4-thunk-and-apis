@@ -4,17 +4,24 @@ import Item from "./components/Item";
 import FavItem from "./components/FavItem";
 
 import { fetchAnother } from "./actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { calculateNewValue } from "@testing-library/user-event/dist/utils";
 
 export default function App() {
-  const loading = false;
+  /*   const loading = false;
   const current = null;
-  const favs = [];
+  const favs = []; */
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchAnother());
+    call();
   }, []);
+
+  const { loading, current, favs, error } = useSelector((state) => state);
+
+  const call = () => {
+    dispatch(fetchAnother());
+  };
 
   function addToFavs() {}
 
@@ -46,7 +53,10 @@ export default function App() {
           {current && <Item data={current} />}
 
           <div className="flex gap-3 justify-end py-3">
-            <button className="select-none px-4 py-2 border border-blue-700 text-blue-700 hover:border-blue-500 hover:text-blue-500">
+            <button
+              onClick={call}
+              className="select-none px-4 py-2 border border-blue-700 text-blue-700 hover:border-blue-500 hover:text-blue-500"
+            >
               Başka bir tane
             </button>
             <button
