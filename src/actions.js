@@ -21,11 +21,12 @@ export const removeFav = (id) => {
 export const fetchAnother = () => (dispatch) => {
   dispatch({ type: FETCH_LOADING });
   axios
-    .get("https://catfact.ninja/fact")
+    .get("https://www.boredapi.com/api/activity")
     .then((res) => {
-      dispatch({ type: FETCH_SUCCESS, payload: res.data.fact });
+      dispatch({ type: FETCH_SUCCESS, payload: res.data.activity });
     })
     .catch((error) => {
-      dispatch({ type: FETCH_ERROR, payload: error });
+      dispatch({ type: FETCH_ERROR, payload: error.message });
     });
+  //error.message yazdırtmazsam ekranda hata gözükmüyor , komple bi hata alıyorum.
 };

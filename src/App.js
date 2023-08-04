@@ -3,9 +3,8 @@ import { Switch, Route, NavLink } from "react-router-dom";
 import Item from "./components/Item";
 import FavItem from "./components/FavItem";
 
-import { fetchAnother } from "./actions";
+import { fetchAnother, addFav, removeFav } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
-import { calculateNewValue } from "@testing-library/user-event/dist/utils";
 
 export default function App() {
   /*   const loading = false;
@@ -48,20 +47,29 @@ export default function App() {
       <Switch>
         <Route exact path="/">
           {loading && (
-            <div className="bg-white p-6 text-center shadow-md">YÜKLENİYOR</div>
+            <div className="bg-white p-6 text-center shadow-md">
+              your activity is loiding, pls wait
+            </div>
+          )}
+          {error && (
+            <div className="bg-white p-6 text-center shadow-md">
+              Hatalısınız arayın: {error}
+            </div>
           )}
           {current && <Item data={current} />}
 
           <div className="flex gap-3 justify-end py-3">
             <button
               onClick={call}
-              className="select-none px-4 py-2 border border-blue-700 text-blue-700 hover:border-blue-500 hover:text-blue-500"
+              disabled={loading}
+              className="disabled:opacity-30 select-none px-4 py-2 border border-blue-700 text-blue-700 hover:border-blue-500 hover:text-blue-500"
             >
               Başka bir tane
             </button>
             <button
               onClick={addToFavs}
-              className="select-none px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white"
+              disabled={loading}
+              className="disabled:opacity-30 select-none px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white"
             >
               Favorilere ekle
             </button>
