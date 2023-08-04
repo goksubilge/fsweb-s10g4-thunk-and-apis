@@ -7,11 +7,8 @@ import {
   GET_FAVS_FROM_LS,
 } from "./actions";
 
-/*
 import { toast } from "react-toastify";
-const apiStatus = toast.loading("e Loading...")
-toast.update(apiStatus,{render:"loading road", type:"sucess", isLoading: false})
-*/
+let apiStatus = null;
 
 const initial = {
   favs: [],
@@ -37,13 +34,47 @@ export function myReducer(state = initial, action) {
       return state;
 
     case FETCH_SUCCESS:
-      return state;
+      // böyle bir toastify oluşturma şekli de var, ilk dört satırı belirledik flan, örnek olarak bırakıyorum.
+      toast.update(apiStatus, {
+        render: "✅okey, process done honey 🐷",
+        type: "sucess",
+        isLoading: false,
+        position: "top-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return { ...state, loading: true, error: null };
 
     case FETCH_LOADING:
-      return state;
+      apiStatus = toast.loading("E Loading be Sugar...🔅", {
+        position: "top-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return { ...state, current: action.payload, loading: false };
 
     case FETCH_ERROR:
-      return state;
+      apiStatus = toast.error("🦄 Wow there's a mistake", {
+        position: "top-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return { ...state, error: action.payload, loading: false };
 
     case GET_FAVS_FROM_LS:
       return state;
